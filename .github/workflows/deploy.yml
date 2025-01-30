@@ -3,7 +3,7 @@ name: Deploy React App to GitHub Pages
 on:
   push:
     branches:
-      - main  # Ou a branch que você estiver usando para deploy
+      - main  # Ou a branch que você está usando para deploy
 
 jobs:
   build:
@@ -34,3 +34,6 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist  # Diretório de saída do Vite, onde os arquivos de build ficam
+      permissions:
+        contents: write  # Permissões para editar o conteúdo do repositório
+        pages: write     # Permissões para fazer push na branch gh-pages
