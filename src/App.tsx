@@ -19,7 +19,7 @@ const Providers: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 export function App() {
   return (
-    <BrowserRouter basename="/sapiens-frontend">
+    <BrowserRouter basename="/">
       <NotificationProvider>
         <Providers>
           <AppRoutes />
