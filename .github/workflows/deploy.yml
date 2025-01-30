@@ -3,7 +3,7 @@ name: Deploy React App to GitHub Pages
 on:
   push:
     branches:
-      - main  # ou a branch que você estiver usando para deploy
+      - main  # Ou a branch que você estiver usando para deploy
 
 jobs:
   build:
@@ -16,16 +16,21 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '14'  # ou a versão que você está usando no seu projeto
+        node-version: '16'  # Ou a versão do Node.js que você está usando no seu projeto
 
     - name: Install dependencies
       run: npm install
 
-    - name: Build the React app
-      run: npm run build
+    - name: Run TypeScript build and Vite build
+      run: |
+        echo "Running TypeScript build..."
+        tsc -b
+        echo "Running Vite build..."
+        npm run build
+      continue-on-error: false  # Garante que o workflow falhe caso o TypeScript ou Vite falhem
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build
+        publish_dir: ./dist  # Diretório de saída do Vite, onde os arquivos de build ficam
